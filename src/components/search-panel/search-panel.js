@@ -12,11 +12,16 @@ class SearchPanel extends React.Component {
                         className="search-panel__input  ml-1"
                         type="text"
                         placeholder="BTC"
+                        value={this.props.inputValue}
+                        onChange={this.props.onChange}
                     />
                 </label>
 
-                <span className="search-panel__info">Все тикеры по фильтру: <span
-                    className="errorSpan">all tickers</span></span>
+                {this.props.inputValue &&
+                    <span className="search-panel__info">Все тикеры по фильтру: <span
+                        className="errorSpan">{this.props.inputValue}</span></span>
+                }
+
                 <hr/>
             </div>
         );
