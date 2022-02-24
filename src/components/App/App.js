@@ -1,31 +1,32 @@
 import React from "react";
 import Cryptonomikon from "../../store/cryptonomikon";
-import TickerAddForm from "../ticker-add-form/ticker-add-form";
-import SearchPanel from "../search-panel/search-panel";
-import TickersList from "../tickers-list/tickers-list";
-import Graph from "../graph/graph";
-import './app.css';
+import TickerAddForm from "../TickerAddForm/TickerAddForm";
+import SearchPanel from "../SearchPanel/SearchPanel";
+import TickersList from "../TickersList/TickersList";
+import Graph from "../Graph/Graph";
+import './App.css';
 import {observer} from "mobx-react";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.store = new Cryptonomikon()
+        this.store = new Cryptonomikon();
     }
 
     componentDidMount() {
         if (localStorage.getItem('appID')) {
-            this.store.loadDataToLocalStorage()
+            this.store.loadDataToLocalStorage();
         }
 
         // спросить как быть с промисами чтобы не создавать переменных
-        const foo = this.store.loadAvailableTickers()
-        // console.log(foo);
-        this.updateInterval = setInterval(this.store.downloadingUpdatedTickerPrice, 3000)
+        // const foo = this.store.loadAvailableTickers()
+        this.store.loadAvailableTickers().then();
+
+        this.updateInterval = setInterval(this.store.downloadingUpdatedTickerPrice, 3000);
     }
 
     componentWillUnmount() {
-        clearInterval(this.updateInterval)
+        clearInterval(this.updateInterval);
     }
 
     render() {

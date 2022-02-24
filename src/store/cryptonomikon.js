@@ -125,7 +125,7 @@ class Cryptonomikon {
 
     get isValidTicker() {
         if (this.formInputValue === '') {
-            return {status: false, message: ''}
+            return {status: false, message: ''};
         } else if (!this.isRepeatTickerName) {
             return {status: false, message: 'Такой тикер уже добавлен'};
         } else if (!this.isAvailableTickerName) {

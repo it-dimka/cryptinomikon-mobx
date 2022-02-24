@@ -1,6 +1,6 @@
 import React from "react";
-import TickersListItem from "../tickers-list-item/tickers-list-item";
-import './tickers-list.css';
+import TickersListItem from "../TickersListItem/TickersListItem";
+import './TickersList.css';
 
 class TickersList extends React.Component {
     renderTicker(ticker) {
@@ -14,11 +14,11 @@ class TickersList extends React.Component {
                 onDelete={this.props.onDeleteTicker}
                 onSelect={this.props.onSelectTicker}
             />
-        )
+        );
     }
 
     render() {
-        const tickersList = this.props.trackedTickers.map(ticker => this.renderTicker(ticker))
+        const tickersList = this.props.trackedTickers.map(ticker => this.renderTicker(ticker));
         return (
             <ul className="ticker-list">
                 {tickersList}

@@ -1,5 +1,5 @@
 import React from "react";
-import './ticker-add-form.css';
+import './TickerAddForm.css';
 
 class TickerAddForm extends React.Component {
     isValidOptionsTicker() {

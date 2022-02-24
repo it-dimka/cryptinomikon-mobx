@@ -1,11 +1,11 @@
 import React from "react";
-import './tickers-list-item.css';
+import './TickersListItem.css';
 
 class TickersListItem extends React.Component {
     render() {
         let extraClass = 'ticker-list__item ';
         if (this.props.selectedTicker?.id === this.props.id) {
-            extraClass += 'active'
+            extraClass += 'active';
         }
 
         return (
@@ -17,7 +17,8 @@ class TickersListItem extends React.Component {
                 <button
                     className="btn ticker-list__item_btn"
                     onClick={(event) => this.props.onDelete(event, this.props.id)}
-                >Удалить</button>
+                >Удалить
+                </button>
             </li>
         );
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import './graph.css';
+import './Graph.css';
 
 class Graph extends React.Component {
     minValue() {
@@ -16,18 +16,18 @@ class Graph extends React.Component {
         const max = this.maxValue();
         let height = null;
         if (min === max) {
-            height = '50%'
+            height = '50%';
         } else {
-            height = (5 + ((value - min) * 95) / (max -min)) + '%'
+            height = (5 + ((value - min) * 95) / (max - min)) + '%';
         }
         return <div className="graph__block"
                     key={idx}
                     style={{height: height}}
-        />
+        />;
     }
 
     render() {
-        const graphValues = this.props.graphValues.map((value, idx) => this.renderValues(value, idx))
+        const graphValues = this.props.graphValues.map((value, idx) => this.renderValues(value, idx));
 
         return (
             <div className="graph">
