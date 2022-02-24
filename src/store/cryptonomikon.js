@@ -30,7 +30,7 @@ class Cryptonomikon {
             const response = await fetch(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${trackedTickersNames}&tsyms=USD&api_key=${API_KEY}`);
             const data = await response.json();
 
-            this.updatePrice(data)
+            this.updatePrice(data);
         }
     };
 
@@ -46,17 +46,17 @@ class Cryptonomikon {
             }
             return ticker;
         });
-    }
+    };
 
     saveDataToLocalStorage = () => {
-        localStorage.setItem('appID', String(Cryptonomikon.id))
-        localStorage.setItem('trackedTickers', JSON.stringify(this.trackedTickersList))
-    }
+        localStorage.setItem('appID', String(Cryptonomikon.id));
+        localStorage.setItem('trackedTickers', JSON.stringify(this.trackedTickersList));
+    };
 
     loadDataToLocalStorage = () => {
         Cryptonomikon.id = Number(localStorage.getItem('appID'));
-        this.trackedTickersList = JSON.parse(localStorage.getItem('trackedTickers'))
-    }
+        this.trackedTickersList = JSON.parse(localStorage.getItem('trackedTickers'));
+    };
 
     changedFormInputValue = (event) => {
         this.formInputValue = event.target.value.trim().toUpperCase();
@@ -72,7 +72,7 @@ class Cryptonomikon {
             const newTicker = {id: Cryptonomikon.id++, name: this.formInputValue, price: 'not price'};
             this.trackedTickersList.push(newTicker);
             this.formInputValue = '';
-            this.saveDataToLocalStorage()
+            this.saveDataToLocalStorage();
         }
     };
 
@@ -82,7 +82,7 @@ class Cryptonomikon {
         if (this.selectedTicker?.id === id) {
             this.selectedTicker = null;
         }
-        this.saveDataToLocalStorage()
+        this.saveDataToLocalStorage();
     };
 
     selectTicker = (id) => {
@@ -97,7 +97,7 @@ class Cryptonomikon {
     // Спросить про ошибку (что то про строгий режим), если этот action сделать computed
     availableOptionsTicker = () => {
         if (this.formInputValue !== '') {
-            const valid = this.availableTickersList.some(ticker => ticker.startsWith(this.formInputValue))
+            const valid = this.availableTickersList.some(ticker => ticker.startsWith(this.formInputValue));
             if (valid) {
                 return this.availableTickersList.filter(ticker => ticker.startsWith(this.formInputValue)).slice(0, 4);
             }
@@ -106,28 +106,27 @@ class Cryptonomikon {
 
     // Дублирование кода с addTicker
     availableTickerHandler = (event) => {
-        this.formInputValue = event.target.textContent
+        this.formInputValue = event.target.textContent;
         if (this.isValidTicker.status) {
             const newTicker = {id: Cryptonomikon.id++, name: this.formInputValue, price: 'not price'};
             this.trackedTickersList.push(newTicker);
             this.formInputValue = '';
-            this.saveDataToLocalStorage()
+            this.saveDataToLocalStorage();
         }
-    }
+    };
 
     get isRepeatTickerName() {
         return !this.trackedTickersList.map(ticker => ticker.name).includes(this.formInputValue);
     }
 
     get isAvailableTickerName() {
-        if (this.formInputValue.length < 2) {
-            return true;
-        }
         return this.availableTickersList.includes(this.formInputValue);
     }
 
     get isValidTicker() {
-        if (!this.isRepeatTickerName) {
+        if (this.formInputValue === '') {
+            return {status: false, message: ''}
+        } else if (!this.isRepeatTickerName) {
             return {status: false, message: 'Такой тикер уже добавлен'};
         } else if (!this.isAvailableTickerName) {
             return {status: false, message: 'Тикер отсутствует в базе'};
