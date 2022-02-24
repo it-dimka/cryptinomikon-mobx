@@ -2,6 +2,15 @@ import React from "react";
 import './TickerAddForm.css';
 
 class TickerAddForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.inputRef = React.createRef()
+    }
+
+    componentDidMount() {
+        this.inputRef.current.focus()
+    }
+
     isValidOptionsTicker() {
         return Boolean(this.props.optionsTicker());
     }
@@ -24,6 +33,7 @@ class TickerAddForm extends React.Component {
                         className="add-form__input"
                         type="text"
                         placeholder="Например BTC"
+                        ref={this.inputRef}
                         value={this.props.inputValue}
                         onChange={this.props.onChange}
                     />
