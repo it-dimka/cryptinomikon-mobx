@@ -18,7 +18,7 @@ class TickerAddForm extends React.Component {
     renderOptionsTicker() {
         return this.props.optionsTicker().map(ticker => <span className="add-form__options-ticker-list_item"
                                                               key={ticker}
-                                                              onClick={(event) => this.props.onClick(event)}
+                                                              onClick={event => this.props.onClick(event)}
         >{ticker}</span>);
     }
 
